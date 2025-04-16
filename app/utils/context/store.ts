@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-interface User {
+export interface User {
     id: number;
     username: string;
     quiz_answers: object;
+    spotifyImageUrl: string;
 }
 
 interface UserState {
@@ -21,13 +22,14 @@ const useUserStore = create<UserState>((set) => ({
 
 const fetchUser = async (): Promise<User> => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
     try {
         const response = await axios.get(`${apiUrl}auth/me`, {
-            method: 'GET',
             withCredentials: true,
         });
+   
 
-        return response.data; // Return the user data
+        return response.data;
     } catch (error) {
         console.error('Error fetching user:', error);
         throw error;

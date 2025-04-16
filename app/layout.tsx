@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import QueryProvider from "./components/QueryProvider";
 
