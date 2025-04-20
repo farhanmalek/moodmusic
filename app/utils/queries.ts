@@ -5,8 +5,10 @@ interface LoginResponse {
 }
 
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+
 export default async function handleSpotifyLogin(): Promise<void> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   try {
       const response: AxiosResponse<LoginResponse> = await axios.get(
         `${apiUrl}auth/login`
@@ -20,5 +22,19 @@ export default async function handleSpotifyLogin(): Promise<void> {
       window.location.href = auth_url;
   } catch (error: any) {
     console.error("Error fetching data from API:", error.message || error);
+  }
+}
+
+export async function logOutUser(): Promise<void> {
+  try {
+    
+    await axios.get(`${apiUrl}auth/logout`, {
+      withCredentials: true 
+    })
+
+
+  } catch (error: any) {
+    console.error("Error Logging User Out", error.message || error)
+    
   }
 }

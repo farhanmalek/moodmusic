@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import { persist } from 'zustand/middleware';
 
 export interface User {
     id: number;
@@ -13,12 +14,18 @@ interface UserState {
     setUser: (user: User) => void;
     clearUser: () => void;
 }
-
-const useUserStore = create<UserState>((set) => ({
-    user: null,
-    setUser: (user: User) => set({ user }),
-    clearUser: () => set({ user: null }),
-}));
+const useUserStore = create<UserState>()(
+    persist(
+      (set) => ({
+        user: null,
+        setUser: (user) => set({ user }),
+        clearUser: () => set({ user: null }),
+      }),
+      {
+        name: 'user-storage'
+      }
+    ),
+  );
 
 const fetchUser = async (): Promise<User> => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -28,8 +35,8 @@ const fetchUser = async (): Promise<User> => {
             withCredentials: true,
         });
    
-
         return response.data;
+        
     } catch (error) {
         console.error('Error fetching user:', error);
         throw error;
