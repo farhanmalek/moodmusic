@@ -1,6 +1,8 @@
 import React from 'react'
 
 const FinishedQuiz = () => {
+
+  
   return (
     <div className="text-center px-6 py-8">
       <h2 className="text-2xl font-semibold mb-4">You're all set! 🎉</h2>

@@ -17,12 +17,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { logOutUser } from "@/app/utils/queries"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 
 const NavBar = () => {
   const { user } = useUserStore()
   const router = useRouter()
+  const pathName = usePathname()
 
   async function handleLogout() {
     useUserStore.persist.clearStorage();
@@ -39,7 +40,7 @@ const NavBar = () => {
       </div>
       <DropdownMenu>
       <DropdownMenuTrigger asChild>
-      {user && (
+      {user && (pathName !== "/") && (
         <div className="absolute right-6">
           <UserIcon user={user} />
         </div>

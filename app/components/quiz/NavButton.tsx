@@ -26,7 +26,7 @@ const NavButton = ({ action, handleModalNavChange, setIsFirstLogin }: NavButtonP
   return (
     <button
       onClick={handleClick}
-      className={`px-5 py-2 rounded-md font-medium transition duration-200 w-[50%] ${
+      className={`px-5 py-2 rounded-md font-medium transition duration-200 w-[50%] text-white ${
         isSubmit
           ? 'bg-purple-600 hover:bg-purple-700'
           : 'bg-gray-700 hover:bg-gray-600'
