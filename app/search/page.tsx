@@ -45,6 +45,7 @@ const page = () => {
 
   const handleModalNavChange = (action: string) => {
     if (action === "Back") {
+      setInputEmpty(false)
       setModalStep((prev) => prev - 1);
     }
 
@@ -113,7 +114,7 @@ const page = () => {
       </div>
       <Modal isOpen={isFirstLogin}>
         {currentStep}
-        {modalStep > 0 && modalStep < 5 && inputEmpty && <p className="mt-[-10px] text-red-700 text-sm">Required*</p>}
+        {modalStep > 0 && modalStep < 5 && inputEmpty && <p className="mt-[-20px] ml-[25px] text-red-700 text-sm">Required*</p>}
         <div className="flex justify-center mt-6 gap-4">
           {modalStep > 1 && (
             <NavButton
