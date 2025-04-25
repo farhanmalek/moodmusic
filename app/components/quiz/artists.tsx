@@ -14,7 +14,7 @@ const Artists = ({quizData, setQuizData}: quizProps) => {
         placeholder="E.g., Drake, Taylor Swift, Burna Boy..."
         className="w-full max-w-md mx-auto px-4 py-2 rounded-md bg-zinc-800 placeholder-gray-400 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
         value={quizData.artists}
-        onChange={(e) => {setQuizData((prev) => ({ ...prev, artists: e.target.value }))}}
+        onChange={(e) => {setQuizData((prev) => ({ ...prev, artists: e.target.value.split(',') }))}}
       />
 
     </div>

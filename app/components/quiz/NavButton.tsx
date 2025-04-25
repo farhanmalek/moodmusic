@@ -1,16 +1,31 @@
 import React, { Dispatch, SetStateAction } from 'react'
-
+import { submitUserQuiz } from '@/app/utils/queries'
+import { quizAnswers } from '@/app/search/page'
+import { useUserStore } from '@/app/utils/context/store'
 interface NavButtonProps {
   action: string
   handleModalNavChange?: (action: string) => void,
   setIsFirstLogin?: Dispatch<SetStateAction<boolean>>
+  quizAnswers?: quizAnswers
+  setQuizData?: Dispatch<SetStateAction<quizAnswers>>
 }
 
-const NavButton = ({ action, handleModalNavChange, setIsFirstLogin }: NavButtonProps) => {
-  function handleQuizSubmit() {
-    console.log('quiz submitted')
-    // submit modal
-    // onsubmit, close modal
+const NavButton = ({ action, handleModalNavChange, setIsFirstLogin, quizAnswers, setQuizData }: NavButtonProps) => {
+  const { user,setUser } = useUserStore()
+
+ async function handleQuizSubmit() {
+    const finalQuizData = {
+      ...quizAnswers,
+      user_id: user?.id,
+    };
+
+
+    await submitUserQuiz(finalQuizData as quizAnswers) //submit the quiz
+    setUser({
+      ...user!,
+      quiz_answers: quizAnswers!
+    });
+    
   }
 
   const isSubmit = action === 'Submit'

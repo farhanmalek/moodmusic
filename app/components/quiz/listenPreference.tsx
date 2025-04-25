@@ -4,17 +4,17 @@ import { quizProps } from './language'
 const ListenPreference = ({quizData, setQuizData}: quizProps) => {
 
   function handleGenreSelect(CurrGenre:string) {
-  
+
     setQuizData(prev => {
-      const isSelected = prev.listening_preferences.includes(CurrGenre);
-      console.log(CurrGenre)
+      const isSelected = prev.listening_preference.includes(CurrGenre);
       const updatedGenres = isSelected
-        ? prev.listening_preferences.filter(genre => genre !== CurrGenre)
-        : [...prev.listening_preferences, CurrGenre];
+        ? prev.listening_preference.filter(genre => genre !== CurrGenre)
+        : [...prev.listening_preference, CurrGenre];
+
   
       return {
         ...prev,
-        listening_preferences: updatedGenres
+        listening_preference: updatedGenres
       };
     });
   }
@@ -31,7 +31,7 @@ const ListenPreference = ({quizData, setQuizData}: quizProps) => {
         {["Hip Hop", "Pop", "Jazz", "Rock", "Electronic", "R&B", "Indie"].map((genre) => (
           <button
             key={genre}
-            className={`text-white px-4 py-2 rounded-full bg-zinc-800 border border-zinc-600 ${quizData.listening_preferences.includes(genre) ? "bg-gray-400" : "bg-black"}`}
+            className={`text-white px-4 py-2 rounded-full ${quizData.listening_preference.includes(genre) ? "bg-gray-400" : "bg-black"}`}
             onClick={() => handleGenreSelect(genre)}
           >
             {genre}

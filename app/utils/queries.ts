@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-
+import { quizAnswers } from "../search/page";
 interface LoginResponse {
   auth_url: string;
 }
@@ -36,5 +36,24 @@ export async function logOutUser(): Promise<void> {
   } catch (error: any) {
     console.error("Error Logging User Out", error.message || error)
     
+  }
+}
+
+
+export async function submitUserQuiz(quizAnswers: quizAnswers): Promise<void> {
+  try {
+    const response = await axios.post(
+      `${apiUrl}quiz/create`,
+      quizAnswers, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+  } catch (error: any) {
+    console.error("Error saving quiz:", error.response?.data || error.message || error);
+    throw error; 
   }
 }
