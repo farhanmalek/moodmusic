@@ -1,8 +1,12 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const Pill = ({ label }: { label: string }) => {
+
+  const router = useRouter();
+
   function handlePillClick() {
-    console.log("pill clicked");
+     router.push(`/results?query=${encodeURIComponent(label)}`)
   }
 
   return (

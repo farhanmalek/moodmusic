@@ -57,3 +57,33 @@ export async function submitUserQuiz(quizAnswers: quizAnswers): Promise<void> {
     throw error; 
   }
 }
+
+interface fetchResultData {
+  songs: Array<Song>
+  description: string
+}
+
+interface Song {
+  name: string,
+  artist: string,
+  album: string,
+  image: string,
+  uri: string
+}
+
+export async function fetchSearchResults(query: string): Promise<fetchResultData> {
+  try {
+    const response = await axios.get(
+      `${apiUrl}playlists/search?prompt=${encodeURIComponent(query)}`, {
+        withCredentials: true
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      "Could not fetch query results",
+      error.response?.data || error.message || error
+    );
+    throw new Error(error.response?.data?.message || "Could not fetch search results");
+  }
+}

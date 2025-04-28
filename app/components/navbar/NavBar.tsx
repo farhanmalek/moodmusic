@@ -37,7 +37,7 @@ const NavBar = () => {
     
     {/* Logo / Title */}
     <div className="text-2xl md:text-3xl font-bold tracking-wide">
-      Mood<span className="text-pink-500">Music</span>
+      <a href="/search">Mood<span className="text-pink-500">Music</span></a>
     </div>
 
     {/* User Menu */}
