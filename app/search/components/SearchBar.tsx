@@ -24,12 +24,12 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search for a song, artist, or mood..."
-        className="w-full p-3 rounded-md bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all"
+        className="w-full p-3 rounded-md bg-white/20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-black transition-all"
         value={query}
         onChange={(e) => handleQuery(e)}
       />
       <button
-        className="bg-pink-600 text-white py-2 px-4 rounded-md font-semibold transition-all hover:bg-pink-700 focus:ring-2 focus:ring-pink-400"
+        className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-semibold transition-all hover:bg-[#1DB954] focus:ring-2 focus:ring-black"
         onClick={handleQuerySearch}
       >
         Enter

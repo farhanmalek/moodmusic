@@ -32,12 +32,12 @@ const NavBar = () => {
 
 
   return (
-<div className="w-full px-6 py-4 bg-gradient-to-r from-purple-950 to-indigo-900 text-white shadow-md backdrop-blur-md sticky top-0 z-50">
+<div className="w-full px-6 py-4 bg-[#1DB954] text-white shadow-md backdrop-blur-md sticky top-0 z-50">
   <div className="max-w-7xl mx-auto flex items-center justify-between relative">
     
     {/* Logo / Title */}
     <div className="text-2xl md:text-3xl font-bold tracking-wide">
-      <a href="/search">Mood<span className="text-pink-500">Music</span></a>
+      <a href="/search">Mood<span className="text-black">Music</span></a>
     </div>
 
     {/* User Menu */}

@@ -129,7 +129,7 @@ const page = () => {
 
   return (
     <>
-      <div className="min-h-screen w-full bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white px-4 py-8 flex flex-col items-center">
+      <div className="min-h-screen w-full text-white px-4 py-8 flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-2">Hey {user?.username} 👋</h2>
         <p className="text-lg mb-8">
           What do you feel like listening to today?
