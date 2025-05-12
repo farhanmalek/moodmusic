@@ -247,7 +247,7 @@ const page = () => {
         ))}
       </div>
 
-      <AddPlaylist/>
+      <AddPlaylist songs={devData}/>
 
       </div>
       

@@ -63,7 +63,7 @@ interface fetchResultData {
   description: string
 }
 
-interface Song {
+export interface Song {
   name: string,
   artist: string,
   album: string,
@@ -86,4 +86,8 @@ export async function fetchSearchResults(query: string): Promise<fetchResultData
     );
     throw new Error(error.response?.data?.message || "Could not fetch search results");
   }
+}
+
+export async function createUserPlaylist() {
+  
 }

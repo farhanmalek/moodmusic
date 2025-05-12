@@ -1,11 +1,26 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Modal from '../components/quiz/quizModal';
+import ImageAdder from './ImageAdder';
+import { Song } from '../utils/queries';
 
-const AddPlaylist = () => {
+interface AddPlaylistProps {
+  songs: Song | any
+}
+
+
+const AddPlaylist = ({songs}: AddPlaylistProps) => {
 
     const [showMakeModal, setShowMakeModal] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>('')
+    const [image, setImage] = useState<string | null>(null)
 
+    const handleNameChange = (e:ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value)
+    }
 
+    const handlePlaylistCreate = () => {
+      //TODO: create playlist submission function
+    }
  
 
 
@@ -16,7 +31,11 @@ const AddPlaylist = () => {
     </button>
     {
         showMakeModal && <Modal isOpen={showMakeModal}>
-            <p>Nigger</p>
+          <h2>Make It Yours</h2>
+            <input type='text' value={inputValue} placeholder='Give your playlist a name...' onChange={(e) => handleNameChange(e)} required/>
+            <ImageAdder image={image} setImage={setImage}/>
+            <button type='submit' onClick={handlePlaylistCreate}>Create Playlist</button>
+            
         </Modal>
     }
     </>
