@@ -88,6 +88,31 @@ export async function fetchSearchResults(query: string): Promise<fetchResultData
   }
 }
 
-export async function createUserPlaylist() {
+export async function createUserPlaylist(songs: Array<Song>, playlistName: string, image?: string | null, query?:string | null) {
+
+  const reqObj = {
+    songs: {
+      songs
+    },
+    playlist_name: playlistName,
+    image,
+    query
+  }
+  try {
+
+    const response = await axios.post(`${apiUrl}playlists/create`, reqObj, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    console.log("Playlist created", response.data)
+    console.log("status", response.status)
+
+    
+  } catch (error:any) {
+    console.error(error)
+  }
   
 }

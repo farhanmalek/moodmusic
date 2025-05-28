@@ -20,8 +20,6 @@ const ImageAdder = ({image, setImage}: ImageAdderProps) => {
         }
         reader.readAsDataURL(file);
 
-
-
     }
 
 

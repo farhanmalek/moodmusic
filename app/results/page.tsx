@@ -235,7 +235,7 @@ const page = () => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto flex flex-col gap-10">
-      <div className="flex justify-between border width-[100%] items-center">
+      <div className="flex justify-between width-[100%] items-center">
       <div className=" w-[124px] grid grid-cols-2 grid-rows-2">
         {uniqueAlbumImages.map((img, index) => (
           <img
