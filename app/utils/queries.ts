@@ -60,7 +60,6 @@ export async function submitUserQuiz(quizAnswers: quizAnswers): Promise<void> {
 
 interface fetchResultData {
   songs: Array<Song>
-  description: string
 }
 
 export interface Song {
