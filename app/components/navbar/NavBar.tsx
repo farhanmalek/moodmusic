@@ -30,38 +30,53 @@ const NavBar = () => {
     setMounted(true);
   }, []);
 
-
   return (
-<div className="w-full px-6 py-4 bg-[#1DB954] text-white shadow-md backdrop-blur-md sticky top-0 z-50">
-  <div className="max-w-7xl mx-auto flex items-center justify-between relative">
-    
-    {/* Logo / Title */}
-    <div className="text-2xl md:text-3xl font-bold tracking-wide">
-      <a href="/search">Mood<span className="text-black">Music</span></a>
-    </div>
+    <nav className="w-full bg-black/30 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo / Title */}
+          <div className="flex-shrink-0">
+            <a href="/search" className="flex items-center space-x-2 group">
+              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#1DB954] to-[#1ed760] bg-clip-text text-transparent group-hover:from-[#1ed760] group-hover:to-[#1DB954] transition-all duration-300">
+                Mood<span className="text-white">Music</span>
+              </span>
+            </a>
+          </div>
 
-    {/* User Menu */}
-    {mounted && user && pathName !== "/" && (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-all focus:outline-none">
-            <UserIcon user={user} />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="mt-2 w-44 bg-white text-black shadow-xl rounded-md">
-          <DropdownMenuItem
-            className="cursor-pointer hover:bg-black/10 px-4 py-2 rounded transition-all"
-            onClick={handleLogout}
-          >
-            Log out
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    )}
-  </div>
-</div>
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="/search" className="text-gray-300 hover:text-white transition-colors duration-200">
+              Search
+            </a>
+            <a className="text-gray-300 hover:text-white transition-colors duration-200">
+              Playlists (coming soon)
+            </a>
+          </div>
 
-
+          {/* User Menu */}
+          {mounted && user && pathName !== "/" && (
+            <div className="flex items-center">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 px-4 py-1 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1DB954] focus:ring-offset-2 focus:ring-offset-gray-900">
+                    <UserIcon user={user} />
+                    <span className="text-sm font-medium">{user.username}</span>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="mt-2 w-56 bg-gray-900/95 backdrop-blur-lg border border-white/10 text-white shadow-xl rounded-lg">
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-white/10 px-4 py-3 rounded-md transition-all duration-200"
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
   )
 }
 

@@ -109,6 +109,14 @@ const page = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, []);
+
   const pillOptions = [
     "Workout",
     "Chill",
@@ -120,17 +128,14 @@ const page = () => {
     "Happy",
     "Study",
     "Sleep",
-    "Cooking",
-    "Rainy Day",
     "Summer Vibes",
-    "Throwback",
     "Late Night",
   ];
 
   return (
     <>
       <div className="min-h-screen w-full text-white px-4 py-8 flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-2">Hey {user?.username} 👋</h2>
+        <h2 className="text-3xl font-bold mb-2">Hey {user?.username}!</h2>
         <p className="text-lg mb-8">
           What do you feel like listening to today?
         </p>
@@ -139,7 +144,7 @@ const page = () => {
 
 
         <div className="text-sm text-white/90 mb-3">
-          Can’t decide? Select from the options below
+          Can't decide? Select from the options below
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 max-w-3xl w-full">
