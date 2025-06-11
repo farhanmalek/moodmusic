@@ -44,14 +44,16 @@ const NavBar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="/search" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Search
-            </a>
-            <a className="text-gray-300 hover:text-white transition-colors duration-200">
-              Playlists (coming soon)
-            </a>
-          </div>
+          {pathName !== "/" && (
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="/search" className="text-gray-300 hover:text-white transition-colors duration-200">
+                Search
+              </a>
+              <a className="text-gray-300 hover:text-white transition-colors duration-200">
+                Playlists (coming soon)
+              </a>
+            </div>
+          )}
 
           {/* User Menu */}
           {mounted && user && pathName !== "/" && (

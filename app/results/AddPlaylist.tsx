@@ -1,10 +1,10 @@
 'use client'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import Modal from '../components/quiz/quizModal';
+import React, { ChangeEvent, useState } from 'react'
 import ImageAdder from './ImageAdder';
 import { Song } from '../utils/queries';
 import { createUserPlaylist } from '../utils/queries';
 import { useSearchParams } from 'next/navigation';
+import PortalModal from '../../components/PortalModal';
 
 interface AddPlaylistProps {
   songs: Song | any
@@ -51,49 +51,42 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
         <span className="drop-shadow">Make it Mine</span>
       </button>
 
-      {showMakeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center min-h-screen bg-black/70 backdrop-blur-md">
-          <div className="relative w-[90%] max-w-md bg-gray-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
-            <h2 className="text-2xl font-bold mb-4 text-center text-white">Make It Yours</h2>
-
-            <input
-              type="text"
-              value={inputValue}
-              placeholder="Give your playlist a name..."
-              onChange={handleNameChange}
-              required
-              className="w-full border border-gray-700 bg-gray-800 text-white rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-[#1DB954] placeholder-gray-400"
-            />
-
-            <ImageAdder image={image} setImage={setImage} />
-
-            <button
-              type="submit"
-              onClick={handlePlaylistCreate}
-              className="w-full mt-4 bg-gradient-to-r from-[#1DB954] to-[#1ed760] text-white font-bold py-2 rounded-lg shadow hover:from-[#1ed760] hover:to-[#1DB954] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1DB954]"
-            >
-              Create Playlist
-            </button>
-
-            <div className="h-[30px] p-2 mt-2 text-sm text-center text-red-400 min-h-[1.5em]">
-              {formMessage}
-            </div>
-
-            <button
-              onClick={() => {
-                setImage(null)
-                setInputValue('')
-                setFormMessage(null)
-                setShowMakeModal(false)
-              }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold focus:outline-none"
-              aria-label="Close"
-            >
-              &times;
-            </button>
+      <PortalModal isOpen={showMakeModal}>
+        <div className="relative w-full max-w-md bg-gray-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-4 text-center text-white">Make It Yours</h2>
+          <input
+            type="text"
+            value={inputValue}
+            placeholder="Give your playlist a name..."
+            onChange={handleNameChange}
+            required
+            className="w-full border border-gray-700 bg-gray-800 text-white rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-[#1DB954] placeholder-gray-400"
+          />
+          <ImageAdder image={image} setImage={setImage} />
+          <button
+            type="submit"
+            onClick={handlePlaylistCreate}
+            className="w-full mt-4 bg-gradient-to-r from-[#1DB954] to-[#1ed760] text-white font-bold py-2 rounded-lg shadow hover:from-[#1ed760] hover:to-[#1DB954] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1DB954]"
+          >
+            Create Playlist
+          </button>
+          <div className="h-[30px] p-2 mt-2 text-sm text-center text-red-400 min-h-[1.5em]">
+            {formMessage}
           </div>
+          <button
+            onClick={() => {
+              setImage(null)
+              setInputValue('')
+              setFormMessage(null)
+              setShowMakeModal(false)
+            }}
+            className="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold focus:outline-none"
+            aria-label="Close"
+          >
+            &times;
+          </button>
         </div>
-      )}
+      </PortalModal>
     </>
   )
 }
