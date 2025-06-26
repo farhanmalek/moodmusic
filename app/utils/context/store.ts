@@ -28,7 +28,7 @@ const useUserStore = create<UserState>()(
   );
 
 const fetchUser = async (): Promise<User> => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://moodmusic-backend.onrender.com/';
     
     try {
         const response = await axios.get(`${apiUrl}auth/me`, {

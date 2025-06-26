@@ -14,13 +14,19 @@ export const TypewriterEffect = ({
   cursorClassName?: string;
 }) => {
   const [index, setIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 2000); 
+    }, 2000);
     return () => clearInterval(interval);
   }, [words.length]);
+
+  if (!mounted) {
+    return <div className={cn("relative flex font-heading", className)} />;
+  }
 
   return (
     <div className={cn("relative flex font-heading ", className)}>

@@ -15,6 +15,9 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
     const [inputValue, setInputValue] = useState<string>('')
     const [image, setImage] = useState<string | null>(null)
     const [formMessage, setFormMessage] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isSuccess, setIsSuccess] = useState<boolean>(false)
+    const [createdPlaylist, setCreatedPlaylist] = useState<any>(null)
 
     const searchParams = useSearchParams()
     const query = searchParams.get('query')
@@ -27,6 +30,7 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
     }
 
     const handlePlaylistCreate = async () => {
+      setIsLoading(true)
       setFormMessage('')
       if (!inputValue) {
         setFormMessage("Please provide a playlist name")
@@ -40,6 +44,10 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
       }
   
       const res = await createUserPlaylist(songs?.songs, inputValue, base64String, query )
+      console.log(res, "res")
+      setIsLoading(false)
+      setIsSuccess(true)
+      setCreatedPlaylist(res.playlist)
     }
 
   return (
@@ -52,12 +60,33 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
       </button>
 
       <PortalModal isOpen={showMakeModal}>
-        <div className="relative w-full max-w-md bg-gray-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
+        {
+          isSuccess ? (
+            <div className="relative w-full max-w-md bg-gray-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
+              <h2 className="text-2xl font-bold mb-4 text-center text-white">Playlist Created</h2>
+              <p className="text-center text-white">Your playlist has been created successfully.</p>
+              <p>Check out here: <a href={`https://open.spotify.com/playlist/${createdPlaylist?.id}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">Playlist</a></p>
+              <button
+                onClick={() => {
+                  setShowMakeModal(false)
+                  setIsSuccess(false)
+                  setCreatedPlaylist(null)
+                  setInputValue('')
+                  setImage(null)
+                  setFormMessage(null)
+                  setIsLoading(false)
+                }}
+                className="mt-4 bg-gradient-to-r from-[#1DB954] to-[#1ed760] text-white px-3 font-bold py-2 rounded-lg shadow hover:from-[#1ed760] hover:to-[#1DB954] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1DB954]"
+              >
+                Close 
+              </button>
+            </div>
+          ) : <div className="relative w-full max-w-md bg-gray-900/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col items-center">
           <h2 className="text-2xl font-bold mb-4 text-center text-white">Make It Yours</h2>
           <input
             type="text"
             value={inputValue}
-            placeholder="Give your playlist a name..."
+            placeholder="Give your playlist a name..."  
             onChange={handleNameChange}
             required
             className="w-full border border-gray-700 bg-gray-800 text-white rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-[#1DB954] placeholder-gray-400"
@@ -68,7 +97,7 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
             onClick={handlePlaylistCreate}
             className="w-full mt-4 bg-gradient-to-r from-[#1DB954] to-[#1ed760] text-white font-bold py-2 rounded-lg shadow hover:from-[#1ed760] hover:to-[#1DB954] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1DB954]"
           >
-            Create Playlist
+            {isLoading ? "Creating..." : "Create Playlist"}
           </button>
           <div className="h-[30px] p-2 mt-2 text-sm text-center text-red-400 min-h-[1.5em]">
             {formMessage}
@@ -86,6 +115,9 @@ const AddPlaylist = ({songs}: AddPlaylistProps) => {
             &times;
           </button>
         </div>
+
+        }
+        
       </PortalModal>
     </>
   )

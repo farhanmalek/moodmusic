@@ -4,9 +4,8 @@ interface LoginResponse {
   auth_url: string;
 }
 
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+// Use production API URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://moodmusic-backend.onrender.com/';
 
 export default async function handleSpotifyLogin(): Promise<void> {
   try {
@@ -104,10 +103,9 @@ export async function createUserPlaylist(songs: Array<Song>, playlistName: strin
       headers: {
         "Content-Type": "application/json"
       }
-    })
+      })
+    return response.data
 
-    console.log("Playlist created", response.data)
-    console.log("status", response.status)
 
     
   } catch (error:any) {
