@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { fetchSearchResults } from "../utils/queries";
 import { useQuery } from "@tanstack/react-query";
 import AddPlaylist from "./AddPlaylist";
@@ -12,7 +12,7 @@ const Spinner = () => (
   </div>
 );
 
-const Page = () => {
+const ResultsContent = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
   const [showAll, setShowAll] = useState(false);
@@ -100,6 +100,14 @@ const Page = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <ResultsContent />
+    </Suspense>
   );
 };
 
